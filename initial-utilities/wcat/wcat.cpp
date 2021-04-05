@@ -12,5 +12,6 @@ using namespace std;
 int main (int argc, char *argv[]){
 
   // read file from user and print it's content
+  cout<<"Checking GitHub push from command line"<<endl;
   return 0;
 }
