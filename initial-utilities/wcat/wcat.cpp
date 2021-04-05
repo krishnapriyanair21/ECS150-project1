@@ -12,6 +12,11 @@ using namespace std;
 int main (int argc, char *argv[]){
 
   // read file from user and print it's content
-  cout<<"Checking GitHub push from command line"<<endl;
+  
+  //check if file is open
+  //if file is not open, open in read only
+  //else read file
+  // write contents to screen
+  //CLOSE FILE
   return 0;
 }
