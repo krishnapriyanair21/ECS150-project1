@@ -10,7 +10,7 @@
 using namespace std;
 
 int main (int argc, char *argv[]){
-
+  
   // passed a search term
   // search through each line and print line if search term is found
 

@@ -14,30 +14,27 @@ int main (int argc, char *argv[]){
     int fd;
     char buffer[4096];
     int ret;
-    int bytesRead = 0;
+    int i = 0;
 
-    // read file from user and print it's content
-
-    //check if file is open
     if (argc == 1){
-        fd = STDIN_FILENO;
+        return 0; // if no file, return 
     }
-    //if file is not open, open in read only
-    else{
+    else{        
         fd = open(argv[1], O_RDONLY);
-        if (fd == -1){
-            cerr <<"wcat: cannot open file" << endl;
-            return 1;
-        }
-    }
-    while ((ret = read(fd,buffer, 4096)) > 0){
-        ret = write(fd, buffer, bytesRead);
+        i = 1;
     }
 
-    if (argc != 1){
-        close(fd);
+    if (fd == -1){ 
+        cerr <<"wcat: cannot open file "<<  endl;
+        return 1;
     }
-    else{
+
+    while ((ret = read(fd,buffer, 4096)) > 0){
+        ret = write(STDOUT_FILENO, buffer, ret);
+        /// need to loop through opening multiple files
+    }
+
+    if (close(fd) < 0){
         cerr<< "wcat: cannot close file" <<endl;
     }
 
