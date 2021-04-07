@@ -12,40 +12,34 @@ int main (int argc, char *argv[]){
     int fd = 0;
     char buffer[4096];
     int ret = 0;
-    int i = 0;
+    int i = 1; // first term is search term
+    string search = '';
 
     if (argc == 1){
-        return 0; // if no file, return 
+        cout << "wgrep: searchterm [file ...]" <<endl;
+        return 1; // if no file error and cout 
     }
-
-    for (int j = argc; j > 1; j--){
+    search = argv[1]; // set search term
+    /// how to check for no files?
+    for (int j = argc; j > 2; j--){ // search term is first arg. open files after search term
         fd = open(argv[++i], O_RDONLY);
         if (fd == -1){  /// exit if bad file
-            cout <<"wcat: cannot open file"<<  endl;
+            cout <<"wgrep: cannot open file"<<  endl;
             return 1;
         }
-        while ((ret = read(fd, buffer, 4096)) > 0 ){
-           ret = write(STDOUT_FILENO, buffer, ret);
+        while ((ret = read(fd, buffer, 4096)) > 0 ){  // how to check for new line?
+            if (/*match to line*/){ 
+                ret = write(STDOUT_FILENO, buffer, ret);
+            }
         }
     }
 
     while (fd >= 3){
         if (close(fd) > 0 ){
-            cout<< "wcat: cannot close file" <<endl;
+            cout<< "wgrep: cannot close file" <<endl;
             return 1;
         }
         else fd--;
     }
     return 0;
-
-     // passed a search term
-  // search through each line and print line if search term is found
-
-  // if no string is passed, print "wgrep: searchterm [file ...]"<<endl;
-    // return 1
-  // if file cannot be opened print "wgrep: cannot open file"<<endl;
-    // return 1
-
-  // if no file, read from STDIN
-  // empty string = match with no lines
 }
