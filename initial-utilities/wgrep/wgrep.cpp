@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <unistd.h>
+ #include <string.h>
 
 using namespace std;
 
@@ -13,13 +14,12 @@ int main (int argc, char *argv[]){
     char buffer[4096];
     int ret = 0;
     int i = 1; // first term is search term
-    string search = '';
 
     if (argc == 1){
         cout << "wgrep: searchterm [file ...]" <<endl;
         return 1; // if no file error and cout 
     }
-    search = argv[1]; // set search term
+
     /// how to check for no files?
     for (int j = argc; j > 2; j--){ // search term is first arg. open files after search term
         fd = open(argv[++i], O_RDONLY);
@@ -27,8 +27,11 @@ int main (int argc, char *argv[]){
             cout <<"wgrep: cannot open file"<<  endl;
             return 1;
         }
-        while ((ret = read(fd, buffer, 4096)) > 0 ){  // how to check for new line?
-            if (/*match to line*/){ 
+        while ((ret = read(fd, buffer, 4096)) > 0){  // how to check for new line?
+            cout << "loop" <<endl;
+            if (strstr(buffer, argv[1])){ 
+                cout << "compared"<<endl;
+                cout <<buffer << ": is buffer" <<endl;
                 ret = write(STDOUT_FILENO, buffer, ret);
             }
         }
