@@ -21,7 +21,7 @@ int main (int argc, char *argv[]){
     for (int j = argc; j > 1; j--){
         fd = open(argv[++i], O_RDONLY);
         if (fd == -1){  /// exit if bad file
-            cerr <<"wcat: cannot open file "<<  endl;
+            cout <<"wcat: cannot open file"<<  endl;
             return 1;
         }
         while ((ret = read(fd, buffer, 4096)) > 0 ){
@@ -31,10 +31,10 @@ int main (int argc, char *argv[]){
 
     while (fd >= 3){
         if (close(fd) > 0 ){
-            cerr<< "wcat: cannot close file" <<endl;
+            cout<< "wcat: cannot close file" <<endl;
+            return 1;
         }
         else fd--;
     }
-    
     return 0;
 }
