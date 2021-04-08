@@ -22,7 +22,7 @@ int main (int argc, char *argv[]){
     for (int j = argc; j > 1; j--){
         fd = open(argv[++i], O_RDONLY);
         if (fd == -1){  /// exit if bad file
-            cout <<"wcat: cannot open file"<<  endl;
+            cout <<"wunzip: cannot open file"<<  endl;
             return 1;
         }
         while ((ret = read(fd, buffer, 4096)) > 0 ){
